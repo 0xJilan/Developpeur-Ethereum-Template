@@ -1,7 +1,7 @@
 pragma solidity >=0.8.13 <=0.8.17;
 
 // SPDX-License-Identifier: MIT
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol"
 
 contract Voting is Ownable {
     struct Voter {
