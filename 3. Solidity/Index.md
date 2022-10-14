@@ -1,4 +1,4 @@
 # Solidity Lang Related project
 
-- VotingSystem
+- Voting
 - ...
