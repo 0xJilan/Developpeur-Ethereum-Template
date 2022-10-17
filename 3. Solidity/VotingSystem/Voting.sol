@@ -19,6 +19,7 @@ contract Voting is Ownable {
     struct Proposal {
         string description;
         uint256 voteCount;
+        uint256 firstVoteTimestamp;
     }
     enum WorkflowStatus {
         RegisteringVoters,
@@ -40,6 +41,10 @@ contract Voting is Ownable {
 
     constructor() {
         admin = msg.sender;
+        Proposals.push(Proposal("propal 1", 10, 2));
+        Proposals.push(Proposal("propal 2", 3, 5));
+        Proposals.push(Proposal("propal 3", 10, 1));
+        Proposals.push(Proposal("propal 4", 7, 9));
     }
 
     modifier isWorkflowStatusValid(
@@ -115,16 +120,8 @@ contract Voting is Ownable {
         )
     {
         uint256 proposalId = Proposals.length;
-        Proposals.push(Proposal(_description, 0));
+        Proposals.push(Proposal(_description, 0, 0));
         emit ProposalRegistered(proposalId);
-    }
-
-    function getProposalById(uint256 proposalId)
-        public
-        view
-        returns (string memory)
-    {
-        return Proposals[proposalId].description;
     }
 
     function closeProposalsRegistration()
@@ -170,6 +167,10 @@ contract Voting is Ownable {
         Whitelist[msg.sender].hasVoted = true;
         Whitelist[msg.sender].votedProposalId = proposalId;
         Proposals[proposalId].voteCount++;
+        Proposals[proposalId].firstVoteTimestamp = Proposals[proposalId]
+            .firstVoteTimestamp == 0
+            ? block.timestamp
+            : 0;
         emit Voted(msg.sender, proposalId);
     }
 
@@ -187,6 +188,72 @@ contract Voting is Ownable {
             WorkflowStatus.VotingSessionEnded
         );
     }
+
+    function getVotedProposalIdByAddress(address addressToCheck)
+        public
+        view
+        isVoterWhitelisted
+        returns (uint256 proposalId)
+    {
+        require(
+            Whitelist[addressToCheck].hasVoted == true,
+            "Voter has not yet voted!"
+        );
+        return Whitelist[addressToCheck].votedProposalId;
+    }
+
+    function countVote()
+        public
+        onlyOwner
+        isWorkflowStatusValid(
+            WorkflowStatus.VotingSessionEnded,
+            "You can't count vote for the moment!"
+        )
+    {
+        uint256 tempWinningProposalID;
+        bool isWinner = false;
+        for (uint8 i = 0; i < Proposals.length; i++) {
+            if (Proposals[i].voteCount > 0) {
+                isWinner = true;
+                bool isOlderThanLast = Proposals[i].firstVoteTimestamp <
+                    Proposals[tempWinningProposalID].firstVoteTimestamp
+                    ? true
+                    : false;
+                bool isVoteCountEqual = Proposals[i].voteCount ==
+                    Proposals[tempWinningProposalID].voteCount
+                    ? true
+                    : false;
+                bool isBiggerVoteCount = Proposals[i].voteCount >
+                    Proposals[tempWinningProposalID].voteCount
+                    ? true
+                    : false;
+                tempWinningProposalID = isBiggerVoteCount ||
+                    (isVoteCountEqual && isOlderThanLast)
+                    ? i
+                    : tempWinningProposalID;
+            }
+        }
+        state = WorkflowStatus.VotesTallied;
+        emit WorkflowStatusChange(
+            WorkflowStatus.VotingSessionEnded,
+            WorkflowStatus.VotesTallied
+        );
+
+        winningProposalId = isWinner == false ? 999 : tempWinningProposalID;
+    }
+
+    function getWinningProposal()
+        public
+        view
+        isWorkflowStatusValid(
+            WorkflowStatus.VotesTallied,
+            "You can't get the winning proposal before vote counted !"
+        )
+        returns (string memory)
+    {
+        return
+            winningProposalId == 999
+                ? "No Winner!"
+                : Proposals[winningProposalId].description;
+    }
 }
-// Axe d'améloioration
-// Gerer les cas d'égalité entre deux votes
