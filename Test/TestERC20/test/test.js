@@ -34,9 +34,7 @@ contract("MyToken", (accounts) => {
     expect(await myTokenInstance.balanceOf(_recipient)).to.be.bignumber.equal(
       new BN(0)
     );
-
     await myTokenInstance.transfer(_recipient, new BN(100), { from: _owner });
-
     expect(await myTokenInstance.balanceOf(_owner)).to.be.bignumber.equal(
       new BN(9900)
     );
