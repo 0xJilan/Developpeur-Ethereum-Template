@@ -1,39 +1,43 @@
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 require("dotenv").config();
 
-const { MNEMONIC, ALCHEMY_KEY, INFURA_KEY } = process.env;
-const HDWalletProvider = require("@truffle/hdwallet-provider");
+const {
+  MNEMONIC,
+  ALCHEMY_GOERLI_URL,
+  ALCHEMY_GOERLI_KEY,
+  ALCHEMY_MUMBAI_URL,
+  ALCHEMY_MUMBAI_KEY,
+} = process.env;
 
 module.exports = {
   networks: {
     development: {
-      host: "127.0.0.1",
-      port: 8545,
-      network_id: "*",
+      host: "127.0.0.1", // Localhost (default: none)
+      port: 8545, // Standard Ethereum port (default: none)
+      network_id: "*", // Any network (default: none)
     },
     goerli: {
-      provider: () =>
-        new HDWalletProvider({
-          mnemonic: {
-            phrase: MNEMONIC,
-          },
-          providerOrUrl: INFURA_KEY,
-        }),
+      provider: function () {
+        return new HDWalletProvider({
+          mnemonic: { phrase: `${MNEMONIC}` },
+          providerOrUrl: `${ALCHEMY_GOERLI_URL}/${ALCHEMY_GOERLI_KEY}`,
+        });
+      },
       network_id: 5,
     },
     mumbai: {
-      provider: () =>
-        new HDWalletProvider({
-          mnemonic: {
-            phrase: MNEMONIC,
-          },
-          providerOrUrl: ALCHEMY_KEY,
-        }),
+      provider: () => {
+        return new HDWalletProvider({
+          mnemonic: { phrase: `${MNEMONIC}` },
+          providerOrUrl: `${ALCHEMY_MUMBAI_URL}/${ALCHEMY_MUMBAI_KEY}`,
+        });
+      },
       network_id: 80001,
     },
   },
-  mocha: {
-    // timeout: 100000
-  },
+
+  mocha: {},
+
   compilers: {
     solc: {
       version: "0.8.17", // Fetch exact version from solc-bin (default: truffle's version)
@@ -42,7 +46,6 @@ module.exports = {
           enabled: false,
           runs: 200,
         },
-        evmVersion: "byzantium",
       },
     },
   },
