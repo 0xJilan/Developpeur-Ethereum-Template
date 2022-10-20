@@ -1,16 +1,22 @@
+const MyToken = artifacts.require("MyToken");
 const { BN, expectRevert, expectEvent } = require("@openzeppelin/test-helpers");
 const { expect } = require("chai");
-const constants = require("@openzeppelin/test-helpers/src/constants");
 
-const myToken = artifacts.require("myToken");
+contract("MyToken", (accounts) => {
+  const _name = "Alyra";
+  const _symbol = "ALY";
+  const _initialSupply = new BN(10000);
+  const _owner = accounts[0];
+  const _recipientAsdress = accounts[1];
+  const _decimal = new BN(18);
 
-contract("myToken", (accounts) => {
-  let owner = accounts[0];
+  let myTokenInstance;
 
-  it("...should store the value 89", async () => {
-    const myTokenInstance = await myToken.deployed();
-    await myTokenInstance.set(89, { from: owner });
-    const storedData = await myTokenInstance.get.call();
-    assert.equal(storedData, 89);
+  beforeEach(async () => {
+    myTokenInstance = await MyToken.new(_initialSupply, { from: _owner });
+  });
+
+  it("has a name", async () => {
+    expect(await myTokenInstance.name()).to.equal(_name);
   });
 });

@@ -1,5 +1,5 @@
-const myToken = artifacts.require("myToken");
+const MyToken = artifacts.require("MyToken");
 
 module.exports = async (deployer) => {
-  await deployer.deploy(myToken);
+  await deployer.deploy(MyToken, 10000);
 };
