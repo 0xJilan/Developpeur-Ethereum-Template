@@ -1,0 +1,11 @@
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity >=0.8.13;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
+contract myToken is ERC20 {
+    constructor(uint256 initialSupply) ERC20("Alyra", "ALY") {
+        _mint(msg.sender, initialSupply);
+    }
+}
