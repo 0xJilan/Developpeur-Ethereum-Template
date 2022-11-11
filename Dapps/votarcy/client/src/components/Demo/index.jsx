@@ -12,6 +12,8 @@ function Demo() {
   const { state } = useEth();
   const [value, setValue] = useState("?");
 
+  console.log('state from useETh:', state);
+
   const demo =
     <>
       <Cta />
