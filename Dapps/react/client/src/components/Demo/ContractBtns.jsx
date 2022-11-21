@@ -2,16 +2,18 @@ import { useState } from "react";
 import useEth from "../../contexts/EthContext/useEth";
 
 function ContractBtns({ setValue, setText }) {
-  const { state: { contract, accounts } } = useEth();
+  const {
+    state: { contract, accounts },
+  } = useEth();
   const [inputValue, setInputValue] = useState("");
-  const [textInput, setTextInput]=useState("text");
+  const [textInput, setTextInput] = useState("text");
 
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     if (/^\d+$|^$/.test(e.target.value)) {
       setInputValue(e.target.value);
     }
   };
-  const handleTextChange = e => {
+  const handleTextChange = (e) => {
     setTextInput(e.target.value);
   };
 
@@ -20,7 +22,7 @@ function ContractBtns({ setValue, setText }) {
     setValue(value);
   };
 
-  const write = async e => {
+  const write = async (e) => {
     if (e.target.tagName === "INPUT") {
       return;
     }
@@ -29,7 +31,21 @@ function ContractBtns({ setValue, setText }) {
       return;
     }
     const newValue = parseInt(inputValue);
-    await contract.methods.write(newValue).send({ from: accounts[0] });
+    //TODO: add error handler;
+    const getError = (err) => {
+      var open = err.stack.indexOf("{");
+      var close = err.stack.lastIndexOf("}");
+      var j_s = err.stack.substring(open, close + 1);
+      var j = JSON.parse(j_s);
+      var reason = j.data[Object.keys(j.data)[0]].reason;
+      return reason;
+    };
+    try {
+      await contract.methods.write(newValue).call({ from: accounts[0] });
+      await contract.methods.write(newValue).send({ from: accounts[0] });
+    } catch (err) {
+      console.log(getError(err));
+    }
   };
 
   const readText = async () => {
@@ -37,7 +53,7 @@ function ContractBtns({ setValue, setText }) {
     setText(value);
   };
 
-  const writeText = async e => {
+  const writeText = async (e) => {
     if (e.target.tagName === "INPUT") {
       return;
     }
@@ -51,33 +67,31 @@ function ContractBtns({ setValue, setText }) {
 
   return (
     <div className="btns">
-
-      <button onClick={read}>
-        read()
-      </button>
+      <button onClick={read}>read()</button>
 
       <div onClick={write} className="input-btn">
-        write(<input
+        write(
+        <input
           type="text"
           placeholder="uint"
           value={inputValue}
           onChange={handleInputChange}
-        />)
+        />
+        )
       </div>
 
-      <button onClick={readText}>
-        greet()
-      </button>
+      <button onClick={readText}>greet()</button>
 
       <div onClick={writeText} className="input-btn">
-        setGreet(<input
+        setGreet(
+        <input
           type="text"
           placeholder="uint"
           value={textInput}
           onChange={handleTextChange}
-        />)
+        />
+        )
       </div>
-
     </div>
   );
 }

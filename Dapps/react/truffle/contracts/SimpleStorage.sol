@@ -20,6 +20,7 @@ contract SimpleStorage {
     }
 
     function write(uint256 newValue) public {
+        require(newValue != 5, "error msg");
         value = newValue;
         emit valueChanged(newValue);
     }
