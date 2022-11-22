@@ -16,7 +16,6 @@ export const getVoter = async (accounts, contract, setVoter) => {
       .getVoter(accounts[0])
       .call({ from: accounts[0] });
     setVoter(voter);
-    console.log("Voter : ", voter);
   } catch (error) {
     console.log("You're not whitelisted");
   }
