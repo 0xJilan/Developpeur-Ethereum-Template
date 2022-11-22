@@ -63,7 +63,7 @@ export const getWinner = async (accounts, contract, setWinningProposal) => {
 
 export const addVoter = async (contract, accounts, voterAddress) => {
   try {
-    await contract.methods.addVoter(voterAddress).call({ from: accounts[0] });
+    await contract.methods.addVoter(voterAddress).send({ from: accounts[0] });
     console.log("Voter added :", voterAddress);
   } catch (error) {
     if (error.message.includes("Already registered")) {

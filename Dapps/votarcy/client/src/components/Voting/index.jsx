@@ -17,7 +17,7 @@ const Voting = ({ props }) => {
       <div className="Voting_container_title">
         <h1>VOTARCY</h1>
       </div>
-      {isAdmin ? <AdminView /> : <VoterView />}
+      {isAdmin ? <AdminView props={props} /> : <VoterView props={props} />}
     </div>
   );
 };

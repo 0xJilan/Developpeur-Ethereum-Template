@@ -19,12 +19,12 @@ const Layout = () => {
       setIsAdmin(owner === accounts[0]);
       getWorkflowStatus(accounts, contract, setStatus);
     }
-  }, [owner, accounts, isAdmin, voter]);
+  }, [accounts]);
 
   return (
     <div className="Layout">
       <Header props={{ contract, accounts, isAdmin, voter, status }} />
-      <Voting props={{ accounts, isAdmin }} />
+      <Voting props={{ contract, accounts, isAdmin, status }} />
     </div>
   );
 };
