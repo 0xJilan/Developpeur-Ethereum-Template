@@ -168,7 +168,7 @@ export const startVotingSession = async (contract, accounts) => {
 };
 export const endVotingSession = async (contract, accounts) => {
   try {
-    await contract.methods.endVotingSession().call({ from: accounts[0] });
+    await contract.methods.endVotingSession().send({ from: accounts[0] });
   } catch (error) {
     if (error.message.includes("Voting session havent started yet")) {
       console.log("Voting session havent started yet. ");
@@ -178,7 +178,7 @@ export const endVotingSession = async (contract, accounts) => {
 
 export const tallyVotes = async (contract, accounts) => {
   try {
-    await contract.methods.tallyVotes().call({ from: accounts[0] });
+    await contract.methods.tallyVotes().send({ from: accounts[0] });
   } catch (error) {
     if (error.message.includes("Current status is not voting session ended")) {
       console.log("Current status is not voting session ended");

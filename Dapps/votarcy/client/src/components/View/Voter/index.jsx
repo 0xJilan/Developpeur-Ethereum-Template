@@ -1,5 +1,6 @@
 import Register from "./Register";
 import Vote from "./Vote";
+import Winner from "../../Winner";
 
 const VoterView = ({ props }) => {
   const { status } = props;
@@ -15,6 +16,10 @@ const VoterView = ({ props }) => {
         <p>Wait until admin start voting session...</p>
       )}
       {status === "VotingSessionStarted" && <Vote props={props} />}
+      {status === "VotingSessionEnded" && (
+        <p>Vote ended. wait until admin tally votes</p>
+      )}
+      {status === "VotesTallied" && <Winner props={props} />}
     </div>
   );
 };

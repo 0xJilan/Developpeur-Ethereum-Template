@@ -7,6 +7,7 @@ import {
   getVoter,
   fetchProposalsArray,
   getWorkflowStatus,
+  getWinner,
 } from "../../lib";
 
 const Layout = () => {
@@ -16,6 +17,7 @@ const Layout = () => {
   const [voter, setVoter] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [proposals, setProposals] = useState([]);
+  const [winningProposal, setWinningProposal] = useState(null);
   const [status, setStatus] = useState(false);
 
   useEffect(() => {
@@ -25,13 +27,24 @@ const Layout = () => {
       fetchProposalsArray(contract, accounts, isAdmin, setProposals);
       setIsAdmin(owner === accounts[0]);
       getWorkflowStatus(accounts, contract, setStatus);
+      status === "VotesTallied" &&
+        getWinner(accounts, contract, setWinningProposal);
     }
   }, [accounts, isAdmin, status]);
 
   return (
     <div className="Layout">
       <Header props={{ contract, accounts, isAdmin, voter, status }} />
-      <Voting props={{ contract, accounts, isAdmin, status, proposals }} />
+      <Voting
+        props={{
+          contract,
+          accounts,
+          isAdmin,
+          status,
+          proposals,
+          winningProposal,
+        }}
+      />
     </div>
   );
 };
