@@ -117,11 +117,13 @@ export const fetchProposalsArray = async (
 };
 
 export const setVote = async (contract, accounts, proposalID) => {
+  console.log("setVote function, proposalID:", proposalID);
   try {
-    // Ici le call avant le send permet de recupérer le require
     await contract.methods.setVote(proposalID).send({ from: accounts[0] });
     console.log("Voted for : ", proposalID);
   } catch (error) {
+    console.log("error:", error);
+
     if (error.message.includes("already voted")) {
       console.log("already voted. ");
     }
