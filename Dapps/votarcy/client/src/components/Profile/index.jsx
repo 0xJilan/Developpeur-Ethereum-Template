@@ -5,7 +5,7 @@ const Profile = ({ props }) => {
   return accounts && accounts[0] ? (
     <div className="Connected">
       <Jazzicon
-        style={{ zIndex: 1000 }}
+        paperStyles={{ zIndex: "1000" }}
         diameter={64}
         seed={jsNumberForAddress(accounts[0])}
       />
