@@ -27,8 +27,7 @@ const Layout = () => {
       fetchProposalsArray(contract, accounts, isAdmin, setProposals);
       setIsAdmin(owner === accounts[0]);
       getWorkflowStatus(accounts, contract, setStatus);
-      status === "VotesTallied" &&
-        getWinner(accounts, contract, setWinningProposal);
+      getWinner(accounts, contract, setWinningProposal);
     }
   }, [accounts, isAdmin, status]);
 

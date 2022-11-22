@@ -41,6 +41,7 @@ export const getWorkflowStatus = async (accounts, contract, setStatus) => {
 };
 
 export const getWinner = async (accounts, contract, setWinningProposal) => {
+  console.log("running get winner");
   try {
     const winningProposalID = await contract.methods
       .winningProposalID()

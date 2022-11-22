@@ -12,11 +12,12 @@ const Vote = ({ props }) => {
   const handleVote = async () => {
     console.log("Vote for: ", proposalID);
     await setVote(contract, accounts, proposalID);
+    window.location.reload();
   };
 
   return (
     <div className="view">
-      <h4>Vote Open!</h4>
+      <h4 className="SubTitle">Vote Open!</h4>
       {proposals && proposals.length > 0 ? (
         proposals.map((proposal, i) => {
           return (
@@ -28,7 +29,7 @@ const Vote = ({ props }) => {
       ) : (
         <p>NoProposals</p>
       )}
-      <button className="Button_Add_Voter" onClick={() => handleVote()}>
+      <button className="SecondButton" onClick={() => handleVote()}>
         Vote {proposalID != null && `for ${proposals[proposalID][0]}`}
       </button>
     </div>

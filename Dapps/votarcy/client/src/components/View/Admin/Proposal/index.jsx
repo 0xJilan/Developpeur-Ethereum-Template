@@ -4,15 +4,15 @@ const Proposal = ({ props }) => {
   const { contract, accounts } = props;
 
   const handleClose = async () => {
-    console.log("handleclose");
     await endProposalsRegistering(contract, accounts);
+    window.location.reload();
   };
 
   return (
     <div className="view">
-      <h4>Proposal Session open</h4>
-      <button className="Button_Add_Voter" onClick={() => handleClose()}>
-        Close Proposal Session
+      <h4 className="SubTitle">Proposal Session open</h4>
+      <button className="MainButton" onClick={() => handleClose()}>
+        Close Proposal
       </button>
     </div>
   );

@@ -10,7 +10,7 @@ const Voting = ({ props }) => {
   return !accounts ? (
     <main>
       <div className="Header_title_container">
-        <h1>WELCOME TO VOTARCY</h1>
+        <h1 className="Title">WELCOME TO VOTARCY</h1>
       </div>
       <div className="Header_section">
         <p>Please Connect to your wallet to access dapp.</p>
@@ -19,7 +19,7 @@ const Voting = ({ props }) => {
   ) : (
     <div className="Voting_container">
       <div className="Voting_container_title">
-        <h1>VOTARCY</h1>
+        <h1 className="Title">VOTARCY</h1>
       </div>
       {isAdmin ? <AdminView props={props} /> : <VoterView props={props} />}
     </div>

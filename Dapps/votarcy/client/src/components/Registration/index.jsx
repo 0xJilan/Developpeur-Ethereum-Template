@@ -18,20 +18,20 @@ const Registration = ({ props }) => {
 
   return (
     <div className="view">
-      <h4>Registration</h4>
+      <h4 className="SubTitle">Registration</h4>
 
       <input
-        className="Input_Address"
+        className="Input"
         type="text"
         id="voterAdress"
         name="voterAdress"
         value={input}
         onChange={(event) => handleInput(event)}
       />
-      <button className="Button_Add_Voter" onClick={() => handleAdd()}>
+      <button className="MainButton" onClick={() => handleAdd()}>
         Add
       </button>
-      <button className="Button_Add_Voter" onClick={() => handleStart()}>
+      <button className="MainButton" onClick={() => handleStart()}>
         Start Proposal Session
       </button>
     </div>

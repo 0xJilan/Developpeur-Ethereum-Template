@@ -34,10 +34,11 @@ main {
 header {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   height: 100%;
   width: 25%;
-  padding: 1rem;
+  padding: 8rem 1rem 8rem;
   background: #e7ecef;
   z-index: 10;
   box-shadow: 0px 0px 7px 10px #888;
@@ -49,16 +50,40 @@ header {
   justify-content: center;
   align-items: center;
 }
+.Header_section {
+  text-align: center;
+}
+.Title {
+  font-size: 8rem;
+  font-family: monospace;
+  margin-bottom: 3rem;
+
+  text-shadow: 0.5rem 0.5rem 8px #76857f;
+}
+.SubTitle {
+  font-size: 4rem;
+  font-family: monospace;
+  margin-bottom: 3rem;
+
+  text-shadow: 0.25rem 0.25rem 4px #76857f;
+}
+.Regular {
+  font-size: 2rem;
+  font-family: sans-serif;
+  margin-bottom: 1rem;
+  text-shadow: 0.1rem 0.1rem 4px #76857f;
+}
+
 .Header_section_addy {
   font-size: 0.8rem;
 }
 .Connected {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   width: 112px;
-  height: 20vh;
+  height: 180px;
   cursor: pointer;
   text-align: center;
 }
@@ -86,12 +111,153 @@ header {
   flex-direction: column;
   align-items: center;
 }
-.Input_Address {
-  width: 280px;
-  height: 2rem;
+
+.Input {
+  border: none;
+  border-radius: 15px;
+  padding: 15px;
+  background-color: #e8e8e8;
+  box-shadow: 6px 6px 12px #ffffff, -6px -6px 12px #c5c5c5;
+  font-size: medium;
+  font-weight: bold;
+  max-width: 200px;
 }
-.Button_Add_Voter {
-  width: 280px;
-  height: 2rem;
-  padding: 2%;
+
+.Input:focus {
+  outline-color: white;
+  place-content: "Enter your message!";
+}
+
+.MainButton {
+  font-family: inherit;
+  font-size: 20px;
+  background: royalblue;
+  color: white;
+  padding: 0.7em 1em;
+  padding-left: 0.9em;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.MainButton span {
+  display: block;
+  margin-left: 0.3em;
+  transition: all 0.3s ease-in-out;
+}
+
+.MainButton svg {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.MainButton:hover .svg-wrapper {
+  animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+.MainButton:hover svg {
+  transform: translateX(1.2em) rotate(45deg) scale(1.1);
+}
+
+.MainButton:hover span {
+  transform: translateX(5em);
+}
+
+.MainButton:active {
+  transform: scale(0.95);
+}
+
+@keyframes fly-1 {
+  from {
+    transform: translateY(0.1em);
+  }
+
+  to {
+    transform: translateY(-0.1em);
+  }
+}
+
+.SecondButton {
+  padding: 0.9em 1.6em;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 17px;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 12px;
+}
+
+.SecondButton::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(46, 46, 46);
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+/* glow */
+.SecondButton::before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #002bff,
+    #ff00c8,
+    #002bff,
+    #ff0000,
+    #002bff,
+    #ff00c8,
+    #002bff
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 600%;
+  z-index: -1;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  filter: blur(8px);
+  animation: glowing 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+  opacity: 0;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+
+  50% {
+    background-position: 400% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
+
+/* hover */
+.SecondButton:hover::before {
+  opacity: 1;
+}
+
+.SecondButton:active:after {
+  background: transparent;
+}
+
+.SecondButton:active {
+  color: #000;
+  font-weight: bold;
 }

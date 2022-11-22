@@ -1,22 +1,35 @@
 import { useState, useEffect } from "react";
 
+const formatAddress = (address) => {
+  return address[0].slice(0, 5) + "..." + address[0].slice(-4);
+};
+
 const Events = ({ props }) => {
   const { contract } = props;
   const [events, setEvents] = useState(null);
+
+  const status = [
+    "Registering Voters",
+    "Proposals Registration Started",
+    "Proposals Registration Ended",
+    "Voting Session Started",
+    "Voting Session Ended",
+    "Votes Tallied",
+  ];
 
   useEffect(() => {
     if (contract) {
       contract.events
         .VoterRegistered(() => {})
         .on("data", (event) => {
-          setEvents(`${event.returnValues[0]} ajouté à la whitelist!`);
-          console.log(`${event.returnValues[0]} ajouté à la whitelist!`);
+          setEvents(
+            `${formatAddress(event.returnValues[0])} ajouté à la whitelist!`
+          );
         });
       contract.events
         .ProposalRegistered(() => {})
         .on("data", (event) => {
-          setEvents(`Proposition ajoutée :${event.returnValues[0]}`);
-          console.log(`Proposition ajoutée :${event.returnValues[0]}`);
+          setEvents("Proposition ajoutée");
         });
       contract.events
         .Voted(() => {})
@@ -27,22 +40,19 @@ const Events = ({ props }) => {
       contract.events
         .WorkflowStatusChange(() => {})
         .on("data", (event) => {
-          //setPreviousStatus(event.returnValues[0]);
-          //setNewStatus(event.returnValues[1]);
-          setEvents(`New Workflow Status:${event.returnValues[1]}`);
-          console.log(`New Workflow Status:${event.returnValues[1]}`);
+          setEvents(`New Workflow Status:${status[event.returnValues[1]]}`);
         })
-        .on("error", function (error, receipt) {
+        .on("error", (error, receipt) => {
           console.log("Error:", error, receipt);
         });
     }
   }, [contract]);
 
   return (
-    <>
-      <h4>Events : </h4>
+    <div className="Header_section">
+      <h4 className="Regular">Events</h4>
       <p>{events ? events : "No Events"}</p>
-    </>
+    </div>
   );
 };
 

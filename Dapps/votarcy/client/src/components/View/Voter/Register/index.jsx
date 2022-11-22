@@ -11,20 +11,21 @@ const Register = ({ props }) => {
 
   const handleAdd = async () => {
     await addProposal(contract, accounts, input);
+    window.location.reload();
   };
 
   return (
     <div className="view">
-      <h4>Register Proposal</h4>
+      <h4 className="SubTitle">Register Proposal</h4>
       <input
-        className="Input_Address"
+        className="Input"
         type="text"
         id="voterProposal"
         name="voterProposal"
         value={input}
         onChange={(event) => handleInput(event)}
       />
-      <button className="Button_Add_Voter" onClick={() => handleAdd()}>
+      <button className="MainButton" onClick={() => handleAdd()}>
         Submit Proposal
       </button>
     </div>

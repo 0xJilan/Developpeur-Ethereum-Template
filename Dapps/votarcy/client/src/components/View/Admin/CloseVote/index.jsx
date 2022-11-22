@@ -4,12 +4,13 @@ const CloseVote = ({ props }) => {
   const { contract, accounts } = props;
   const handleCloseVote = async () => {
     await endVotingSession(contract, accounts);
+    window.location.reload();
   };
 
   return (
     <div className="view">
-      <h4>Close Voting Session</h4>
-      <button className="Button_Add_Voter" onClick={() => handleCloseVote()}>
+      <h4 className="SubTitle">Close Voting Session</h4>
+      <button className="MainButton" onClick={() => handleCloseVote()}>
         Close Vote
       </button>
     </div>
