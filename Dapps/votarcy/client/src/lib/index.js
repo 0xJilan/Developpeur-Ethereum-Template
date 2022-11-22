@@ -138,7 +138,7 @@ export const startProposalsRegistering = async (contract, accounts) => {
   try {
     await contract.methods
       .startProposalsRegistering()
-      .call({ from: accounts[0] });
+      .send({ from: accounts[0] });
   } catch (error) {
     if (error.message.includes("Registering proposals cant be started now")) {
       console.log("Registering proposals cant be started now");

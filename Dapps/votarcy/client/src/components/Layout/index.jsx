@@ -13,15 +13,13 @@ const Layout = () => {
   const [status, setStatus] = useState(false);
 
   useEffect(() => {
-    console.log("run de layout");
     if (accounts) {
-      console.log("run useEffect Layout");
       getOwner(accounts, contract, setOwner);
       getVoter(accounts, contract, setVoter);
       setIsAdmin(owner === accounts[0]);
       getWorkflowStatus(accounts, contract, setStatus);
     }
-  }, [accounts]);
+  }, [accounts, isAdmin, status]);
 
   return (
     <div className="Layout">

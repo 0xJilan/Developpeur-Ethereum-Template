@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { addVoter } from "../../lib";
+import { addVoter, startProposalsRegistering } from "../../lib";
 
 const Registration = ({ props }) => {
   const { contract, accounts } = props;
@@ -9,8 +9,11 @@ const Registration = ({ props }) => {
     setInput(e.target.value);
   };
 
-  const handleSubmit = async () => {
+  const handleAdd = async () => {
     await addVoter(contract, accounts, input);
+  };
+  const handleStart = async () => {
+    await startProposalsRegistering(contract, accounts);
   };
 
   return (
@@ -25,8 +28,11 @@ const Registration = ({ props }) => {
         value={input}
         onChange={(event) => handleInput(event)}
       />
-      <button className="Button_Add_Voter" onClick={() => handleSubmit()}>
+      <button className="Button_Add_Voter" onClick={() => handleAdd()}>
         Add
+      </button>
+      <button className="Button_Add_Voter" onClick={() => handleStart()}>
+        Start Proposal Session
       </button>
     </div>
   );
