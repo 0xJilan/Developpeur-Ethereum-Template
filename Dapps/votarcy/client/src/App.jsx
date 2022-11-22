@@ -1,7 +1,6 @@
 import { EthProvider } from "./contexts/EthContext";
 import Header from "./components/Header";
 import Voting from "./components/Voting";
-
 import "./App.css";
 
 function App() {

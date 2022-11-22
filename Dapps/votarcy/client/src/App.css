@@ -51,3 +51,12 @@ header {
 .Header_section_addy {
   font-size: 0.8rem;
 }
+.Connected {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 112px;
+  height: 90px;
+  cursor: pointer;
+}
