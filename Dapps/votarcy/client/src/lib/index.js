@@ -6,7 +6,7 @@ export const getOwner = async (accounts, contract, setOwner) => {
     setOwner(contractOwner);
     console.log("contractOwner : ", contractOwner);
   } catch (error) {
-    console.log("Unable to get Owner, more details:", error);
+    console.log("Unable to get Owner");
   }
 };
 
@@ -18,19 +18,26 @@ export const getVoter = async (accounts, contract, setVoter) => {
     setVoter(voter);
     console.log("Voter : ", voter);
   } catch (error) {
-    console.log("You're not whitelisted, more details:", error);
+    console.log("You're not whitelisted");
   }
 };
-
+const status = [
+  "RegisteringVoters",
+  "ProposalsRegistrationStarted",
+  "ProposalsRegistrationEnded",
+  "VotingSessionStarted",
+  "VotingSessionEnded",
+  "VotesTallied",
+];
 export const getWorkflowStatus = async (accounts, contract, setStatus) => {
   try {
     const currentWorkflow = await contract.methods
       .workflowStatus()
       .call({ from: accounts[0] });
-    setStatus(currentWorkflow);
-    console.log("Status : ", currentWorkflow);
+    setStatus(status[currentWorkflow]);
+    console.log("Status : ", status[currentWorkflow]);
   } catch (error) {
-    console.log("Unable to get WorkflowStatus, more details:", error);
+    console.log("Unable to get WorkflowStatus:");
   }
 };
 
@@ -50,7 +57,7 @@ export const getWinner = async (accounts, contract, setWinningProposal) => {
     setWinningProposal(winningProposal);
     console.log("Winning Proposal:", winningProposal);
   } catch (error) {
-    console.log("Unable to get WinningProposal. More details:", error);
+    console.log("Unable to get WinningProposal");
   }
 };
 
@@ -60,10 +67,10 @@ export const addVoter = async (contract, accounts, voterAddress) => {
     console.log("Voter added :", voterAddress);
   } catch (error) {
     if (error.message.includes("Already registered")) {
-      console.log("Already registered. More details:", error);
+      console.log("Already registered");
     }
     if (error.message.includes("Voters registration is not open yet")) {
-      console.log("Voters registration is not open yet. More details:", error);
+      console.log("Voters registration is not open yet");
     }
   }
 };
@@ -74,10 +81,10 @@ export const addProposal = async (contract, accounts, proposal) => {
     console.log("Nouvelle proposition : ", proposal);
   } catch (error) {
     if (error.message.includes("ne rien proposer")) {
-      console.log("Can't submit empty proposal. More details:", error);
+      console.log("Can't submit empty proposal");
     }
     if (error.message.includes("Voters registration is not open yet")) {
-      console.log("Voters registration is not open yet. More details:", error);
+      console.log("Voters registration is not open yet");
     }
   }
 };
@@ -106,7 +113,7 @@ export const fetchProposalsArray = async (
       setProposals(proposalsArray);
     }
   } catch (error) {
-    console.log("Error while fetching proposals. More details:", error);
+    console.log("Error while fetching proposals");
   }
 };
 
@@ -117,13 +124,13 @@ export const setVote = async (contract, accounts, proposalID) => {
     console.log("Voted for : ", proposalID);
   } catch (error) {
     if (error.message.includes("already voted")) {
-      console.log("already voted. More details:", error);
+      console.log("already voted. ");
     }
     if (error.message.includes("Proposal not found")) {
-      console.log("Proposal not found. More details:", error);
+      console.log("Proposal not found. ");
     }
     if (error.message.includes("Voting session havent started yet")) {
-      console.log("Voting session havent started yet. More details:", error);
+      console.log("Voting session havent started yet. ");
     }
   }
 };
@@ -135,10 +142,7 @@ export const startProposalsRegistering = async (contract, accounts) => {
       .call({ from: accounts[0] });
   } catch (error) {
     if (error.message.includes("Registering proposals cant be started now")) {
-      console.log(
-        "Registering proposals cant be started now. More details:",
-        error
-      );
+      console.log("Registering proposals cant be started now");
     }
   }
 };
@@ -150,44 +154,35 @@ export const endProposalsRegistering = async (contract, accounts) => {
       .call({ from: accounts[0] });
   } catch (error) {
     if (error.message.includes("Registering proposals havent started yet")) {
-      console.log(
-        "Registering proposals havent started yet. More details:",
-        error
-      );
+      console.log("Registering proposals havent started yet");
     }
   }
 };
-export const startVotingSession = async () => {
+export const startVotingSession = async (contract, accounts) => {
   try {
     await contract.methods.startVotingSession().call({ from: accounts[0] });
   } catch (error) {
     if (error.message.includes("Registering proposals phase is not finished")) {
-      console.log(
-        "Registering proposals phase is not finished. More details:",
-        error
-      );
+      console.log("Registering proposals phase is not finished");
     }
   }
 };
-export const endVotingSession = async () => {
+export const endVotingSession = async (contract, accounts) => {
   try {
     await contract.methods.endVotingSession().call({ from: accounts[0] });
   } catch (error) {
     if (error.message.includes("Voting session havent started yet")) {
-      console.log("Voting session havent started yet. More details:", error);
+      console.log("Voting session havent started yet. ");
     }
   }
 };
 
-export const tallyVotes = async () => {
+export const tallyVotes = async (contract, accounts) => {
   try {
     await contract.methods.tallyVotes().call({ from: accounts[0] });
   } catch (error) {
     if (error.message.includes("Current status is not voting session ended")) {
-      console.log(
-        "Current status is not voting session ended. More details:",
-        error
-      );
+      console.log("Current status is not voting session ended");
     }
   }
 };

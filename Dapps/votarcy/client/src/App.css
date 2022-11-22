@@ -57,6 +57,7 @@ header {
   justify-content: space-around;
   align-items: center;
   width: 112px;
-  height: 90px;
+  height: 20vh;
   cursor: pointer;
+  text-align: center;
 }

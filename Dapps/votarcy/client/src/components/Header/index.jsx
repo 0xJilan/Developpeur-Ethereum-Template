@@ -1,5 +1,5 @@
 import useEth from "../../contexts/EthContext/useEth";
-import Connect from "../Connect";
+import Profile from "../Profile";
 
 const Header = () => {
   const { state } = useEth();
@@ -9,7 +9,7 @@ const Header = () => {
       <div className="Header_title_container">
         <h1>VOTARCY</h1>
       </div>
-      <Connect state={state} />
+      <Profile state={state} />
     </header>
   );
 };
