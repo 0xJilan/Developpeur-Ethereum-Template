@@ -13,13 +13,14 @@
   --dark-gray: #777;
 }
 
-#App .container {
+.Layout {
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: row;
   background-color: #e7ecef;
 }
+
 main {
   display: flex;
   flex-direction: column;
@@ -35,7 +36,7 @@ header {
   flex-direction: column;
   align-items: center;
   height: 100%;
-  width: 18%;
+  width: 25%;
   padding: 1rem;
   background: #e7ecef;
   z-index: 10;
@@ -60,4 +61,19 @@ header {
   height: 20vh;
   cursor: pointer;
   text-align: center;
+}
+.Voting_container {
+  width: 75%;
+  height: 100%;
+  padding: 4%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Voting_container_title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2%;
 }

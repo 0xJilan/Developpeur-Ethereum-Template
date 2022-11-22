@@ -1,15 +1,11 @@
-import useEth from "../../contexts/EthContext/useEth";
 import Profile from "../Profile";
+import Events from "../Events";
 
-const Header = () => {
-  const { state } = useEth();
-
+const Header = ({ props }) => {
   return (
     <header>
-      <div className="Header_title_container">
-        <h1>VOTARCY</h1>
-      </div>
-      <Profile state={state} />
+      <Profile props={props} />
+      <Events props={props} />
     </header>
   );
 };

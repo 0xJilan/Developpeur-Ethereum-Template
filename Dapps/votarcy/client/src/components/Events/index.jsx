@@ -1,28 +1,28 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-const Events = ({ state }) => {
-  const { contract } = state;
+const Events = ({ props }) => {
+  const { contract } = props;
   const [events, setEvents] = useState([]);
 
-  contract.events
+  contract?.events
     .VoterRegistered(() => {})
     .on("data", (event) => {
       setEvents(...events, `${event.returnValues[0]} ajouté à la whitelist!`);
       console.log(`${event.returnValues[0]} ajouté à la whitelist!`);
     });
-  contract.events
+  contract?.events
     .ProposalRegistered(() => {})
     .on("data", (event) => {
       setEvents(...events, `Proposition ajoutée :${event.returnValues[0]}`);
       console.log(`Proposition ajoutée :${event.returnValues[0]}`);
     });
-  contract.events
+  contract?.events
     .Voted(() => {})
     .on("data", () => {
       setEvents(...events, "Vote enregistré!");
       console.log("Vote enregistré!");
     });
-  contract.events
+  contract?.events
     .WorkflowStatusChange(() => {})
     .on("data", (event) => {
       //setPreviousStatus(event.returnValues[0]);

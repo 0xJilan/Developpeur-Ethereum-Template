@@ -1,9 +1,9 @@
-import useEth from "../../contexts/EthContext/useEth";
+import AdminView from "../View/Admin";
+import VoterView from "../View/Voter";
 
-const Voting = () => {
-  const { state } = useEth();
-
-  return !state.accounts ? (
+const Voting = ({ props }) => {
+  const { accounts, isAdmin } = props;
+  return !accounts ? (
     <main>
       <div className="Header_title_container">
         <h1>WELCOME TO VOTARCY</h1>
@@ -13,8 +13,11 @@ const Voting = () => {
       </div>
     </main>
   ) : (
-    <div className="container">
-      <p>Hello fren!</p>
+    <div className="Voting_container">
+      <div className="Voting_container_title">
+        <h1>VOTARCY</h1>
+      </div>
+      {isAdmin ? <AdminView /> : <VoterView />}
     </div>
   );
 };
