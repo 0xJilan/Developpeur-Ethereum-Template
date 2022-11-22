@@ -4,6 +4,7 @@ const Proposal = ({ props }) => {
   const { contract, accounts } = props;
 
   const handleClose = async () => {
+    console.log("handleclose");
     await endProposalsRegistering(contract, accounts);
   };
 

@@ -76,7 +76,7 @@ export const addVoter = async (contract, accounts, voterAddress) => {
 
 export const addProposal = async (contract, accounts, proposal) => {
   try {
-    await contract.methods.addProposal(proposal).call({ from: accounts[0] });
+    await contract.methods.addProposal(proposal).send({ from: accounts[0] });
     console.log("Nouvelle proposition : ", proposal);
   } catch (error) {
     if (error.message.includes("ne rien proposer")) {
@@ -150,7 +150,7 @@ export const endProposalsRegistering = async (contract, accounts) => {
   try {
     await contract.methods
       .endProposalsRegistering()
-      .call({ from: accounts[0] });
+      .send({ from: accounts[0] });
   } catch (error) {
     if (error.message.includes("Registering proposals havent started yet")) {
       console.log("Registering proposals havent started yet");
@@ -159,7 +159,7 @@ export const endProposalsRegistering = async (contract, accounts) => {
 };
 export const startVotingSession = async (contract, accounts) => {
   try {
-    await contract.methods.startVotingSession().call({ from: accounts[0] });
+    await contract.methods.startVotingSession().send({ from: accounts[0] });
   } catch (error) {
     if (error.message.includes("Registering proposals phase is not finished")) {
       console.log("Registering proposals phase is not finished");

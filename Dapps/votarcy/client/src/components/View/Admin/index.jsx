@@ -1,5 +1,6 @@
 import Registration from "../../Registration";
-import Proposal from "../../View/Admin/Proposal";
+import Proposal from "./Proposal";
+import StartVote from "./StartVote";
 
 const AdminView = ({ props }) => {
   const { status } = props;
@@ -9,6 +10,7 @@ const AdminView = ({ props }) => {
       <p>status: {status}</p>
       {status === "RegisteringVoters" && <Registration props={props} />}
       {status === "ProposalsRegistrationStarted" && <Proposal props={props} />}
+      {status === "ProposalsRegistrationEnded" && <StartVote props={props} />}
     </div>
   );
 };
