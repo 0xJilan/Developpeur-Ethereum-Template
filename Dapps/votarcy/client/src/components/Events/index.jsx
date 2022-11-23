@@ -35,7 +35,6 @@ const Events = ({ props }) => {
         .Voted(() => {})
         .on("data", () => {
           setEvents("Vote enregistré!");
-          console.log("Vote enregistré!");
         });
       contract.events
         .WorkflowStatusChange(() => {})

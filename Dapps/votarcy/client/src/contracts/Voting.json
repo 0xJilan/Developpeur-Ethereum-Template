@@ -19919,10 +19919,16 @@
       "links": {},
       "address": "0x0fEE796fcF146BCb9De1058FA19ED4e4ddc1Ff7F",
       "transactionHash": "0x08a42d43b419c3ea17560549816d543c9ddff980138ef357d415289194b938a7"
+    },
+    "1669178217432": {
+      "events": {},
+      "links": {},
+      "address": "0x43822FAE56F5C11909185E050EDD5eF16133850A",
+      "transactionHash": "0xac03d43bf461887f28100b413abd1b91dc04e7075450b48d95132fc9d2a03773"
     }
   },
   "schemaVersion": "3.4.10",
-  "updatedAt": "2022-11-22T17:41:55.908Z",
+  "updatedAt": "2022-11-23T04:39:46.017Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "smart contract programmer",

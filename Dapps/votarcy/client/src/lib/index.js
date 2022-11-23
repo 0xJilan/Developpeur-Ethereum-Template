@@ -4,7 +4,6 @@ export const getOwner = async (accounts, contract, setOwner) => {
       .owner()
       .call({ from: accounts[0] });
     setOwner(contractOwner);
-    console.log("contractOwner : ", contractOwner);
   } catch (error) {
     console.log("Unable to get Owner");
   }
@@ -34,7 +33,6 @@ export const getWorkflowStatus = async (accounts, contract, setStatus) => {
       .workflowStatus()
       .call({ from: accounts[0] });
     setStatus(status[currentWorkflow]);
-    console.log("Status : ", status[currentWorkflow]);
   } catch (error) {
     console.log("Unable to get WorkflowStatus:");
   }
@@ -54,7 +52,6 @@ export const getWinner = async (accounts, contract, setWinningProposal) => {
       voteCount: proposal.voteCount,
     };
     setWinningProposal(winningProposal);
-    console.log("Winning Proposal:", winningProposal);
   } catch (error) {
     console.log("Unable to get WinningProposal");
   }
@@ -63,7 +60,6 @@ export const getWinner = async (accounts, contract, setWinningProposal) => {
 export const addVoter = async (contract, accounts, voterAddress) => {
   try {
     await contract.methods.addVoter(voterAddress).send({ from: accounts[0] });
-    console.log("Voter added :", voterAddress);
   } catch (error) {
     if (error.message.includes("Already registered")) {
       console.log("Already registered");
@@ -77,7 +73,6 @@ export const addVoter = async (contract, accounts, voterAddress) => {
 export const addProposal = async (contract, accounts, proposal) => {
   try {
     await contract.methods.addProposal(proposal).send({ from: accounts[0] });
-    console.log("Nouvelle proposition : ", proposal);
   } catch (error) {
     if (error.message.includes("ne rien proposer")) {
       console.log("Can't submit empty proposal");
@@ -117,10 +112,8 @@ export const fetchProposalsArray = async (
 };
 
 export const setVote = async (contract, accounts, proposalID) => {
-  console.log("setVote function, proposalID:", proposalID);
   try {
     await contract.methods.setVote(proposalID).send({ from: accounts[0] });
-    console.log("Voted for : ", proposalID);
   } catch (error) {
     console.log("error:", error);
 

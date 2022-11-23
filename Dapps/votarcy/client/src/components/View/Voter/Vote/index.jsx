@@ -10,7 +10,6 @@ const Vote = ({ props }) => {
   };
 
   const handleVote = async () => {
-    console.log("Vote for: ", proposalID);
     await setVote(contract, accounts, proposalID);
     window.location.reload();
   };

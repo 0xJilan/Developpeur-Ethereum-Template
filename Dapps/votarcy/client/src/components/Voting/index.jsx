@@ -4,9 +4,7 @@ import VoterView from "../View/Voter";
 
 const Voting = ({ props }) => {
   const { accounts, isAdmin, status } = props;
-  useEffect(() => {
-    console.log("refresh");
-  }, [status]);
+
   return !accounts ? (
     <main>
       <div className="Header_title_container">
