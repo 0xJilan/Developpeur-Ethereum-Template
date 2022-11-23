@@ -39,6 +39,7 @@ const Layout = () => {
           contract,
           accounts,
           isAdmin,
+          voter,
           status,
           proposals,
           winningProposal,

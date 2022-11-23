@@ -1,4 +1,4 @@
-import Registration from "../../Registration";
+import Registration from "./Registration";
 import Proposal from "./Proposal";
 import StartVote from "./StartVote";
 import CloseVote from "./CloseVote";

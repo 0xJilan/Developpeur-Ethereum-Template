@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { addVoter, startProposalsRegistering } from "../../lib";
+import { addVoter, startProposalsRegistering } from "../../../../lib";
 
 const Registration = ({ props }) => {
   const { contract, accounts } = props;
@@ -11,9 +11,12 @@ const Registration = ({ props }) => {
 
   const handleAdd = async () => {
     await addVoter(contract, accounts, input);
+    setInput("");
+    window.location.reload();
   };
   const handleStart = async () => {
     await startProposalsRegistering(contract, accounts);
+    window.location.reload();
   };
 
   return (

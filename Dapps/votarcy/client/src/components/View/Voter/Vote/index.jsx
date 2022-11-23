@@ -20,7 +20,11 @@ const Vote = ({ props }) => {
       {proposals && proposals.length > 0 ? (
         proposals.map((proposal, i) => {
           return (
-            <button key={i} onClick={() => handleProposalID(i)}>
+            <button
+              className="SecondButton"
+              key={i}
+              onClick={() => handleProposalID(i)}
+            >
               {`${proposal[0]} voice : ${proposal.voteCount}`}
             </button>
           );
@@ -28,7 +32,7 @@ const Vote = ({ props }) => {
       ) : (
         <p>NoProposals</p>
       )}
-      <button className="SecondButton" onClick={() => handleVote()}>
+      <button className="MainButton" onClick={() => handleVote()}>
         Vote {proposalID != null && `for ${proposals[proposalID][0]}`}
       </button>
     </div>

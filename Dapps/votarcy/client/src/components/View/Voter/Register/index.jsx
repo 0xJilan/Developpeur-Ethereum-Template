@@ -2,7 +2,7 @@ import { useState } from "react";
 import { addProposal } from "../../../../lib";
 
 const Register = ({ props }) => {
-  const { contract, accounts } = props;
+  const { contract, accounts, voter } = props;
   const [input, setInput] = useState("");
 
   const handleInput = (e) => {

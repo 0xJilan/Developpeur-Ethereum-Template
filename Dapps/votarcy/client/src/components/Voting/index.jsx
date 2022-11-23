@@ -1,9 +1,8 @@
-import { useEffect } from "react";
 import AdminView from "../View/Admin";
 import VoterView from "../View/Voter";
 
 const Voting = ({ props }) => {
-  const { accounts, isAdmin, status } = props;
+  const { accounts, isAdmin } = props;
 
   return !accounts ? (
     <main>

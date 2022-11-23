@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 
 const formatAddress = (address) => {
-  return address[0].slice(0, 5) + "..." + address[0].slice(-4);
+  return address.slice(0, 5) + "..." + address.slice(-4);
 };
 
 const Events = ({ props }) => {
   const { contract } = props;
   const [events, setEvents] = useState(null);
-
   const status = [
     "Registering Voters",
     "Proposals Registration Started",
@@ -23,7 +22,7 @@ const Events = ({ props }) => {
         .VoterRegistered(() => {})
         .on("data", (event) => {
           setEvents(
-            `${formatAddress(event.returnValues[0])} ajouté à la whitelist!`
+            `${formatAddress(event.returnValues[0])} added to Whitelist!`
           );
         });
       contract.events
@@ -39,7 +38,7 @@ const Events = ({ props }) => {
       contract.events
         .WorkflowStatusChange(() => {})
         .on("data", (event) => {
-          setEvents(`New Workflow Status:${status[event.returnValues[1]]}`);
+          setEvents(`${status[event.returnValues[1]]}`);
         })
         .on("error", (error, receipt) => {
           console.log("Error:", error, receipt);

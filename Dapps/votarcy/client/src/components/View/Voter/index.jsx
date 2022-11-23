@@ -1,4 +1,5 @@
 import Register from "./Register";
+import Registration from "./Registration";
 import Vote from "./Vote";
 import Winner from "../../Winner";
 
@@ -6,9 +7,7 @@ const VoterView = ({ props }) => {
   const { status } = props;
   return (
     <div className="view">
-      {status === "RegisteringVoters" && (
-        <p>Wait until admin finish to add voter to whitelist</p>
-      )}
+      {status === "RegisteringVoters" && <Registration props={props} />}
       {status === "ProposalsRegistrationStarted" && <Register props={props} />}
       {status === "ProposalsRegistrationEnded" && (
         <p>Wait until admin start voting session...</p>
