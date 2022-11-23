@@ -22,7 +22,7 @@ const Events = ({ props }) => {
         .VoterRegistered(() => {})
         .on("data", (event) => {
           setEvents(
-            `${formatAddress(event.returnValues[0])} added to Whitelist!`
+            `${formatAddress(event.returnValues[0])} added to Whitelist`
           );
         });
       contract.events
