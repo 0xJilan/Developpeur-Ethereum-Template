@@ -6,7 +6,7 @@ Dapps is deployed at : <a href='https://solidity-mocha.vercel.app//'>https://sol
 
 ## DEMO VIDEO
 
-COMING
+https://www.loom.com/share/befb15705adb40a2b2a99015ffc54a7a
 
 ## Instalation
 
