@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const Registration = ({ props }) => {
   const { voter } = props;
   console.log("voter from user view registration:", voter);
